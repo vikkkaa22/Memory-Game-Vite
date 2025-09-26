@@ -1,0 +1,50 @@
+$bg-color: pink;
+$w: 100px;
+
+@mixin main-font {
+    color: darkmagenta;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+@mixin paddings($value, $border-color: plum){
+    border: 3px solid $border-color;
+    padding-top: $value*2;
+    padding-bottom: $value*3;
+    padding-left: $value;
+    padding-right: $value;
+}
+
+
+body {
+    background-color: $bg-color;
+}
+
+.block {
+    width: $w + 200;
+    margin: $w / 2;
+    padding: $w - 50px;
+    border: $w*0.1 solid plum;
+    background-color: adjust-color(rgb(211, 207, 160), $red: 80%);
+
+    img {
+        width: 100% - 1%;
+    }
+
+    p {
+        color: adjust-color(purple, $lightness: 10%);
+
+        .bold {
+            font-weight: bold;
+        }
+
+        &:last-child {
+            font-style: italic;
+        }
+    }
+}
+
+p {
+    @include main-font;
+    @include paddings(10px);
+}
