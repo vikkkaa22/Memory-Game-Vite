@@ -7,7 +7,7 @@ $w: 100px;
     line-height: 28px;
 }
 
-@mixin paddings($value, $border-color: plum){
+@mixin paddings($value, $border-color: plum) {
     border: 3px solid $border-color;
     padding-top: $value*2;
     padding-bottom: $value*3;
@@ -15,9 +15,19 @@ $w: 100px;
     padding-right: $value;
 }
 
+@mixin set-color-text {
+    @if(lightness($bg-color) < 30%) {
+        color: rgb(247, 181, 232);
+    }
+
+    @else {
+        color: darkmagenta
+    }
+}
 
 body {
     background-color: $bg-color;
+    @include set-color-text();
 }
 
 .block {
@@ -47,4 +57,47 @@ body {
 p {
     @include main-font;
     @include paddings(10px);
+}
+
+@for $i from 1 to 5 {
+    .item-#{$i} {
+        width: 90%;
+        height: 50px;
+        background-color: adjust-color(rgb(91, 31, 97), $lightness: 100% / $i);
+
+    }
+}
+
+/*-----------------------вёрстка меню-----------------------*/
+.menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 50px;
+
+    &__item {
+        color: white;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0, 4s;
+
+        &:hover {
+            color: rgb(228, 103, 151);
+        }
+
+        &--active {
+            font-weight: bold;
+            color: rgb(255, 35, 156);
+        }
+
+        @media(max-width: 900px) {
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 }
