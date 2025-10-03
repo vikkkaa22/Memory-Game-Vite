@@ -1,103 +1,183 @@
-$bg-color: pink;
-$w: 100px;
+// $bg-color: pink;
+// $w: 100px;
 
-@mixin main-font {
-    color: darkmagenta;
-    font-size: 20px;
-    line-height: 28px;
+// @mixin main-font {
+//     color: darkmagenta;
+//     font-size: 20px;
+//     line-height: 28px;
+// }
+
+// @mixin paddings($value, $border-color: plum) {
+//     border: 3px solid $border-color;
+//     padding-top: $value*2;
+//     padding-bottom: $value*3;
+//     padding-left: $value;
+//     padding-right: $value;
+// }
+
+// @mixin set-color-text {
+//     @if(lightness($bg-color) < 30%) {
+//         color: rgb(247, 181, 232);
+//     }
+
+//     @else {
+//         color: darkmagenta
+//     }
+// }
+
+// body {
+//     background-color: $bg-color;
+//     @include set-color-text();
+// }
+
+// .block {
+//     width: $w + 200;
+//     margin: $w / 2;
+//     padding: $w - 50px;
+//     border: $w*0.1 solid plum;
+//     background-color: adjust-color(rgb(211, 207, 160), $red: 80%);
+
+//     img {
+//         width: 100% - 1%;
+//     }
+
+//     p {
+//         color: adjust-color(purple, $lightness: 10%);
+
+//         .bold {
+//             font-weight: bold;
+//         }
+
+//         &:last-child {
+//             font-style: italic;
+//         }
+//     }
+// }
+
+// p {
+//     @include main-font;
+//     @include paddings(10px);
+// }
+
+// @for $i from 1 to 5 {
+//     .item-#{$i} {
+//         width: 90%;
+//         height: 50px;
+//         background-color: adjust-color(rgb(91, 31, 97), $lightness: 100% / $i);
+
+//     }
+// }
+
+// /*-----------------------вёрстка меню-----------------------*/
+// .menu {
+//     max-width: 1200px;
+//     margin: 0 auto;
+//     display: flex;
+//     flex-direction: row;
+//     list-style: none;
+//     gap: 50px;
+
+//     &__item {
+//         color: white;
+//         text-transform: uppercase;
+//         text-decoration: none;
+//         transition: all 0, 4s, ease-in-out;
+
+//         &:hover {
+//             color: rgb(228, 103, 151);
+//         }
+
+//         &--active {
+//             font-weight: bold;
+//             color: rgb(255, 35, 156);
+//         }
+
+//         @media(max-width: 900px) {
+//             font-size: 20px;
+//         }
+//     }
+
+//     @media (max-width: 768px) {
+//         display: none;
+//     }
+// }
+
+/*---------------------создание формы-----------------------*/
+$bg-btn: rgb(87, 3, 126);
+$color-btn: white;
+$font-size-btn: 16px;
+$radius-btn: 4px;
+
+.auth__btn--login {
+    background-color: $bg-btn;
+    color: adjust-color($bg-btn, $lightness: 50%, $hue: 270deg);
+    font-size: $font-size-btn;
+    border-radius: $radius-btn;
+    border: none;
+    padding-left: $font-size-btn*0.5;
+    padding-right: $font-size-btn*0.5;
+
+    &:hover {
+        background-color: adjust-color($bg-btn, $lightness: 80%);
+        color: adjust-color($color-btn, $lightness: -100%);
+    }
 }
 
-@mixin paddings($value, $border-color: plum) {
-    border: 3px solid $border-color;
-    padding-top: $value*2;
-    padding-bottom: $value*3;
-    padding-left: $value;
-    padding-right: $value;
+.auth__btn--reg {
+    background-color: adjust-color($bg-btn, $lightness: 80%, $hue: 270deg);
+    color: adjust-color($bg-btn, $lightness: -10%);
+    font-size: $font-size-btn;
+    border-radius: $radius-btn;
+    border: none;
+    padding-left: $font-size-btn*0.5;
+    padding-right: $font-size-btn*0.5;
+
+    &:hover {
+        background-color: adjust-color($bg-btn, $lightness: 30%);
+        color: adjust-color($color-btn);
+    }
 }
 
-@mixin set-color-text {
-    @if(lightness($bg-color) < 30%) {
-        color: rgb(247, 181, 232);
+.auth {
+    max-width: 200px;
+    background-color: adjust-color($bg-btn, $lightness: 40%);
+    padding: 20px;
+
+    &__value {
+        border-radius: $radius-btn;
     }
 
-    @else {
-        color: darkmagenta
-    }
-}
+    &__btn {
+        border: none;
+        transition: all 0.3s;
 
-body {
-    background-color: $bg-color;
-    @include set-color-text();
-}
-
-.block {
-    width: $w + 200;
-    margin: $w / 2;
-    padding: $w - 50px;
-    border: $w*0.1 solid plum;
-    background-color: adjust-color(rgb(211, 207, 160), $red: 80%);
-
-    img {
-        width: 100% - 1%;
-    }
-
-    p {
-        color: adjust-color(purple, $lightness: 10%);
-
-        .bold {
-            font-weight: bold;
+        &--login {
+            color: $color-btn;
+            background: $bg-btn;
         }
 
-        &:last-child {
-            font-style: italic;
+        &--reg {
+            color: adjust-color($bg-btn, $lightness: 20%);
+            background: adjust-color($bg-btn, $blackness: 20%);
         }
     }
+
+    input {
+        border-radius: $radius-btn;
+        border: none;
+        @include set-size(&$font-size-btn)
+    }
+
+    // div {
+    //     padding-top: 10px;
+    // }
+
+    // div:first-child {
+    //     padding-top: 0;
+    // }
 }
 
-p {
-    @include main-font;
-    @include paddings(10px);
-}
-
-@for $i from 1 to 5 {
-    .item-#{$i} {
-        width: 90%;
-        height: 50px;
-        background-color: adjust-color(rgb(91, 31, 97), $lightness: 100% / $i);
-
-    }
-}
-
-/*-----------------------вёрстка меню-----------------------*/
-.menu {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    gap: 50px;
-
-    &__item {
-        color: white;
-        text-transform: uppercase;
-        text-decoration: none;
-        transition: all 0, 4s;
-
-        &:hover {
-            color: rgb(228, 103, 151);
-        }
-
-        &--active {
-            font-weight: bold;
-            color: rgb(255, 35, 156);
-        }
-
-        @media(max-width: 900px) {
-            font-size: 20px;
-        }
-    }
-
-    @media (max-width: 768px) {
-        display: none;
-    }
+@mixin set-size($font-size:16px) {
+    font-size: $font-size;
+    padding: $font-size*0.5 &$font-size*0.3;
 }
